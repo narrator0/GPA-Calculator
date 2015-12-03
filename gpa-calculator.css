@@ -1,0 +1,66 @@
+
+body {
+	font-family: Times, sans-serif;
+}
+
+
+.main {
+	margin-top: 20px;
+	padding-bottom: 20px;
+	margin-bottom: -20px;
+	min-height: 600px;
+}
+
+/* This block is for the elements in the jumbotron */
+
+.jumbotron {
+	background-color: #CCFFCC;
+}
+
+.header-text {
+	clear: both;
+}
+
+#big-title {
+	font-family: Impact, sans-serif;
+}
+
+#intro-text {
+	color: gray;
+}
+
+.left-form {
+	float: left;
+	margin-bottom: 10px;
+}
+
+.right-message {
+	clear: left;
+}
+
+
+/* end */
+
+.collapse-result {
+	margin-top: 15px;
+}
+
+#footer {
+	font-family: cursive;
+	clear: both;
+	margin-bottom: 10px;
+	padding: 15px;
+	height: 20px;
+}
+
+
+/* This block is for the table */
+
+
+
+
+/* end */
+
+
+
+

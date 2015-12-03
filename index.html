@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>GPA</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="gpa-calculater.css">
+
+</head>
+<body>
+	
+	<div class="container main">
+
+		
+		<div class="jumbotron">
+			<div class="container">
+				
+				<div class="header-text">
+					<h1 id="big-title">GPA Calculator</h1>
+					<label for="intro-text" id="intro-text">
+						*This is a simple GPA calculator that helps you count your average GPA using 4.0 scale.
+					</label>
+				</div>
+				
+					
+				<!-- left form for input -->
+				<div class="left-form">
+					
+					<div class="form-group">
+						<label for="point">Enter your grade</label>
+						<input class="form-control" type="text" id="point" placeholder="Grade">
+					</div>
+
+					<div class="form-group">
+						<label for="credit">Enter its credit</label>
+						<input class="form-control" type="text" id="credit"placeholder="Credit">
+					</div>
+
+					<a class="btn btn-success" id="next-button">Add Data</a>
+
+					<a class="btn btn-danger" id="refresh-button">
+						<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+					</a>
+
+					<a class="btn btn-primary" id="go-button">Count Average</a>
+
+				</div>
+
+
+				<!-- right div for the result and error message -->
+				<div class="right-message">
+					
+					<!-- error message -->
+					<div class="collapse collapse-error">
+						<div class="alert alert-danger">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							You didn't give the correct input!!!
+						</div>
+					</div>
+
+					<!-- result message -->
+					<div class="collapse collapse-result">
+						<div class="alert alert-info" id="result"></div>
+					</div>
+
+				</div>
+				
+
+			</div>
+		</div>
+
+		<!-- left table for displaying the data -->
+		<div class="data-table">
+
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>*</th>
+						<th>Point</th>
+						<th>Credit</th>
+					</tr>
+				</thead>
+				<tbody id="data-table">
+				</tbody>
+			</table>
+			
+		</div>
+		
+	</div>
+
+	<div id="footer">
+		Designed by <em>Arfullight</em> 2015
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+	<script src="gpaCalculater.js"></script>
+
+
+
+</body>
+</html>
