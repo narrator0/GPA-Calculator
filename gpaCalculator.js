@@ -6,14 +6,66 @@
 
 
 //global var
+
+	//
 var totalCredit = 0,
+
+	//The total after multiple the credit
 	total       = 0,
+
+	//for the average
 	average     = 0,
+
+	//count the number of data
 	count       = 0,
-	tableHtml   = "";
+
+	//array of abjects for the table to display
+	data        = [];
 
 
-function isIncorrectPoint(point, credit)
+//data object initialize
+function DataObject(point, credit)
+{
+	var self = this;
+
+	//ths things in the object
+	self.count    = count;
+	self.point    = point;
+	self.credit   = credit;
+	self.remove    = "<a class='remove-button' id='" + count + "'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>";
+	
+
+	self.scaleGpa = function(point)
+	{
+		if (point >= 80)
+		{
+			return 4;
+		}
+		else if (point >= 70)
+		{
+			return 3;
+		}
+		else if (point >= 60)
+		{
+			return 2;
+		}
+		else if (point >= 50)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+	self.gpa      = self.scaleGpa(point);
+
+
+}
+
+
+function isIncorrectInput(point, credit)
 {
 	if (point > 100 || point < 0 || isNaN(point) || isNaN(credit) || credit <= 0)
 		return true;
@@ -34,55 +86,43 @@ function showErrorImformation()
 
 function addRecord(point, credit)
 {
-	if (isIncorrectPoint(point, credit))
-	{
-		showErrorImformation();
-		return 0;
-	}
-	else if (point >= 80)
-	{
-		total += 4 * credit;
-		totalCredit += credit;
-	}
-	else if (point >= 70)
-	{
-		total += 3 * credit;
-		totalCredit += credit;
-	}
-	else if (point >= 60)
-	{
-		total += 2 * credit;
-		totalCredit += credit;
-	}
-	else if (point >= 50)
-	{
-		total += 1 * credit;
-		totalCredit += credit;
-	}
-	else
-	{
-		total += 0 * credit;
-		totalCredit += credit;
-	}
+	count ++;
+	var record = new DataObject(point, credit);
 
-	showDataTable(point, credit);
+	data.push(record);
+
+	total       += record.gpa * credit;
+	totalCredit += credit;
+
+	showDataTable();
 
 }
 
-function showDataTable(point, credit)
-{
-	count ++;
+function showDataTable()
+{	
 
-	tableHtml += "<tr><td>";
-	tableHtml += count;
-	tableHtml += "</td><td>"
-	tableHtml += point;
-	tableHtml += "</td><td>"
-	tableHtml += credit;
-	tableHtml += "</td></tr>"
+	$('#data-table').html("");
 
+	$('.data-table').tgs(data);
 
-	$('#data-table').html(tableHtml);
+	//define every button
+	$('.remove-button').click(function(){
+		
+
+		var id = parseInt($(this).attr('id')) - 1;
+
+		var dataItem = data[id];
+
+		totalCredit -= dataItem.credit;
+		total       -= dataItem.credit * dataItem.gpa;
+
+		data.splice(id, 1);
+
+		$('#data-table').html("");
+
+		$('.data-table').tgs(data);
+
+	});
 
 }
 
@@ -108,8 +148,15 @@ $('#next-button').click(function(){
 	var credit = parseInt($('#credit').val());
 	var point  = parseInt($('#point').val());
 
-
-	addRecord(point, credit);
+	if (isIncorrectInput(point, credit))
+	{
+		showErrorImformation();
+	}
+	else
+	{
+		addRecord(point, credit);
+	}
+	
 
 
 	//clear the two input tag
@@ -121,19 +168,27 @@ $('#next-button').click(function(){
 
 $('#refresh-button').click(function(){
 
-	total = 0;
+	total       = 0;
 	totalCredit = 0;
-	tableHtml = "";
-
+	count       = 0;
+	average     = 0;
+	data        = [];
 
 	$('.collapse-result').collapse('hide');
 
-	$('#data-table').html(tableHtml);
+	$('#data-table').html("");
 
 });
 
 
 $('#go-button').click(function(){
+
+	if (count == 0)
+	{
+		showErrorImformation();
+
+		return 0;
+	}
 
 	var credit = 0, point = 0, hasInput = false;
 
@@ -155,7 +210,7 @@ $('#go-button').click(function(){
 	}
 	
 
-	if (!isIncorrectPoint(credit, point) || !hasInput)
+	if (!isIncorrectInput(credit, point) || !hasInput)
 	{
 		countAverage();
 
@@ -163,6 +218,13 @@ $('#go-button').click(function(){
 	}
 
 });
+
+
+
+
+
+
+
 
 
 
